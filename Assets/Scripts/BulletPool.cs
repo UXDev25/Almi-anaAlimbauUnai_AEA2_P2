@@ -24,15 +24,20 @@ public class BulletPool : MonoBehaviour
 		}
 		Instance = this;
 		DontDestroyOnLoad(gameObject);
-	}
+        for (int i = 0; i < initialSize; i++)
+        {
+            Bullet bullet = CreateBullet();
+            pool.Push(bullet);
+        }
+    }
 
     private Bullet CreateBullet()
     {
         // TODO:
         //   Instància els prefabs recorda que els has d'instanciar desactivats.
-        Bullet bullet = Instantiate(bulletPrefab, transform);
+        Bullet bullet = Instantiate(bulletPrefab);
         bullet.gameObject.SetActive(false);
-        return null;
+        return bullet;
     }
 
     public Bullet GetBullet(Vector3 position, Quaternion rotation)
@@ -46,9 +51,9 @@ public class BulletPool : MonoBehaviour
         //     retorna-la.
         if (pool.Count <= 0) CreateBullet();
         Bullet newBullet = pool.Pop();
-        newBullet.transform.position = position;
-        newBullet.transform.rotation = rotation;
-        newBullet.Init();
+        newBullet.gameObject.SetActive(true);
+        newBullet.gameObject.transform.position = position;
+        newBullet.gameObject.transform.rotation = rotation;
         return newBullet;
     }
 
