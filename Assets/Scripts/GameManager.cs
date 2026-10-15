@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Game settings")]
     [SerializeField] private int startingLives = 3;
+    [SerializeField] private GameObject eventSystem;
 
     [Header("UI (Phase 7)")]
     [SerializeField] private TMP_Text scoreText;
@@ -37,7 +38,8 @@ public class GameManager : MonoBehaviour
 		}
 		Instance = this;
 		DontDestroyOnLoad(gameObject);
-	}
+    }
+
 
     private void Start()
     {
@@ -85,7 +87,8 @@ public class GameManager : MonoBehaviour
         score = 0;
         lives = startingLives;
 		gameOverPanel.SetActive(false);
-		//     fes un reload de l'escena:
+        //     fes un reload de l'escena:
+        Debug.Log(Time.timeScale);
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 
