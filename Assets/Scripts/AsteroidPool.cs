@@ -49,8 +49,8 @@ public class AsteroidPool : MonoBehaviour
         //   col·loca en la posició correcta, activa'l i retorna'l
         if (pool.Count <= 0) CreateAsteroid();
         Asteroid newAsteroid = pool.Pop();
-        newAsteroid.gameObject.SetActive(true);
         newAsteroid.gameObject.transform.position = position;
+        newAsteroid.gameObject.SetActive(true);
         return newAsteroid;
     }
 

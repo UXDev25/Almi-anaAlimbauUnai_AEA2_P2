@@ -54,6 +54,7 @@ public class BulletPool : MonoBehaviour
         newBullet.gameObject.SetActive(true);
         newBullet.gameObject.transform.position = position;
         newBullet.gameObject.transform.rotation = rotation;
+        newBullet.Init();
         return newBullet;
     }
 

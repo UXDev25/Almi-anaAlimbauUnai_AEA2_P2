@@ -12,3 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb932e916074458459c82426ef052943, type: 3}
   m_Name: SO_Asteroid_2
   m_EditorClassIdentifier: Assembly-CSharp::AsteroidData
+  minSpeed: 2
+  maxSpeed: 3
+  scale: 1
+  maxHealth: 50
+  scoreValue: 50
+  damage: 1
+  color: {r: 0.44481465, g: 0.6981132, b: 0.3984514, a: 1}

@@ -63,7 +63,8 @@ public class GameManager : MonoBehaviour
     {
         // TODO: Resta amount a lives i actualitza la UI.
         lives -= amount;
-        if (lives < 0) GameOver();
+        UpdateUI();
+        if (lives <= 0) GameOver();
     }
 
     private void GameOver()

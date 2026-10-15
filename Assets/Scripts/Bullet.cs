@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed = 12f;
     [SerializeField] private float lifeTime = 2f;
-    [SerializeField] private int damage = 1;
+    [SerializeField] private int damage = 25;
 
     private float lifeTimer;
     private Rigidbody2D rb;
@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
         // TODO: Restem Time.deltaTime a lifeTimer.
         //       si arriba a 0 retorna la bullet amb BulletPool.Instance.ReturnBullet(this).
         lifeTimer -= Time.deltaTime;
-        if (lifeTimer < lifeTime) 
+        if (lifeTimer <= 0) 
         {
             BulletPool.Instance.ReturnBullet(this);
 		}
