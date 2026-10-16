@@ -23,7 +23,7 @@ public class BulletPool : MonoBehaviour
 			return;
 		}
 		Instance = this;
-		DontDestroyOnLoad(gameObject);
+		//DontDestroyOnLoad(gameObject);
         for (int i = 0; i < initialSize; i++)
         {
             Bullet bullet = CreateBullet();
