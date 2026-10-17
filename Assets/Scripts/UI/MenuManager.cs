@@ -23,4 +23,6 @@ public class MenuManager : MonoBehaviour
         Time.timeScale = 1f;
         TransitionManager.Instance.LoadScene(TransitionManager.MAIN_MENU_SCENE);
     }
+
+    public void ExitGame() => Application.Quit();
 }

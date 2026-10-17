@@ -34,7 +34,6 @@ public class Bullet : MonoBehaviour
         {
             BulletPool.Instance.ReturnBullet(this);
 		}
-        Debug.Log(lifeTimer);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
