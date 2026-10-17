@@ -1,24 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
-    public void LoadScene(string sceneName) 
+    public void LoadGameScene()
     {
-		TransitionManager.Instance.SetLoadedAndTime(false, 0);
-		AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+        Time.timeScale = 1f;
+        TransitionManager.Instance.LoadScene(TransitionManager.GAME_SCENE);
+    }
 
-		operation.completed += (AsyncOperation op) =>
-		{
-			TransitionManager.Instance.SetLoadedAndTime(true, 1);
-		};
-		
-	}
+    public void RestartScene() 
+    { 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1f;
+    }
 
-	
-
-public void QuitGame()
+    public void LoadMenuScene()
     {
-        Debug.Log("Quit");
-        Application.Quit();
+        Time.timeScale = 1f;
+        TransitionManager.Instance.LoadScene(TransitionManager.MAIN_MENU_SCENE);
     }
 }

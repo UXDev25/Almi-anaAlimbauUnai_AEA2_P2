@@ -1,3 +1,4 @@
+using System.Transactions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,11 @@ public class GameManager : MonoBehaviour
     [Header("Game settings")]
     [SerializeField] private int startingLives = 3;
     [SerializeField] private GameObject eventSystem;
+    public bool HasLoadedScene { get; set; }
+
+    [Header("Scene Names")]
+    public string playScene = "AsteroidsEscene";
+    public string menuScene = "MainMenu";
 
     [Header("UI (Phase 7)")]
     [SerializeField] private TMP_Text scoreText;
@@ -96,5 +102,20 @@ public class GameManager : MonoBehaviour
     {
         scoreText.text = $"{score}";
         livesText.text = $"{lives}";
+    }
+
+    // --Scene Management--
+    public void SetLoadedAndTime(bool hasLoaded, float time, string sceneName)
+    {
+        Time.timeScale = time;
+        Instance.HasLoadedScene = hasLoaded;
+        transform.GetChild(0).gameObject.SetActive(true);
+    }
+
+
+    public void QuitGame()
+    {
+        Debug.Log("Quit");
+        Application.Quit();
     }
 }
