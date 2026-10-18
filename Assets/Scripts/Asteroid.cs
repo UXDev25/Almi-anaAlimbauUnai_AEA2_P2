@@ -9,7 +9,9 @@ public class Asteroid : MonoBehaviour
 {
     // Una mica més gran que la distancia d'aparició
     [SerializeField] private float despawnDistance = 15f;
-
+    [SerializeField] private AudioClip explosionSFX;
+    [SerializeField] private AudioClip hitSFX;
+    [SerializeField] private float volume = 0.5f;
     private AsteroidData data;
     private int currentHealth;
 
@@ -45,18 +47,24 @@ public class Asteroid : MonoBehaviour
         {
             AsteroidPool.Instance.ReturnAsteroid(this);
         }
+        if (GameManager.Instance.IsGameOver)
+        {
+            AsteroidPool.Instance.ReturnAsteroid(this);
+        }
     }
 
     public void TakeDamage(int amount)
     {
         // TODO: Restem amount al currentHealth
         currentHealth -= amount;
+        AudioManager.Instance.PlaySFX(hitSFX, volume);
         // TODO: si la currentHealth es menor a 0 
         // Sumem els punt al Player
         // Cridem al GameManger i el seu mètode per sumar scoreValue
         // Retornem l'asteroid a la seva pool
         if (currentHealth <= 0) 
         {
+            AudioManager.Instance.PlaySFX(explosionSFX, volume);
             GameManager.Instance.AddScore(data.scoreValue);
             AsteroidPool.Instance.ReturnAsteroid(this);
         }

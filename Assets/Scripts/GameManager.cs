@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text livesText;
     [SerializeField] private GameObject gameOverPanel;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip backgroundMusic;
+    [SerializeField] private AudioClip gameOverMusic;
+    [SerializeField] private AudioClip explosionSFX;
+    [SerializeField] private float sfxVolume = 0.5f;
 
     [Header("Game tags")]
     public string PlayerTag = "Player";
@@ -50,6 +55,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // TODO: inicialitza el joc.
+        AudioManager.Instance.PlayMusic(backgroundMusic, true);
         MainPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         if (MainPlayer == null) throw new MissingReferenceException("Player not detected on scene!"); // Comprobem que el player hi sigui a l'escena
         lives = startingLives;
@@ -72,6 +78,7 @@ public class GameManager : MonoBehaviour
         // TODO: Resta amount a lives i actualitza la UI.
         lives -= amount;
         UpdateUI();
+        AudioManager.Instance.PlaySFX(explosionSFX, sfxVolume);
         if (lives <= 0) GameOver();
     }
 
@@ -82,8 +89,9 @@ public class GameManager : MonoBehaviour
 		Time.timeScale = 0;
 		//     Fes aparèixer el panell de GameOver
         gameOverPanel.SetActive(true);
-
-	}
+        AudioManager.Instance.StopMusic();
+        AudioManager.Instance.PlayMusic(gameOverMusic, true, 0.35f);
+    }
 
     // Assigna aquest mètode al Restart button: On Click () al Inspector.
     public void RestartGame()
@@ -93,10 +101,12 @@ public class GameManager : MonoBehaviour
         score = 0;
         lives = startingLives;
 		gameOverPanel.SetActive(false);
+        AudioManager.Instance.StopMusic();
         //     fes un reload de l'escena:
         Debug.Log(Time.timeScale);
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-	}
+        AudioManager.Instance.PlayMusic(backgroundMusic, true);
+    }
 
     private void UpdateUI()
     {

@@ -12,6 +12,10 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.ISpaceShipAct
     [Header("Shooting")]
     [SerializeField] private Transform firePoint; // EmptyObject a la punta de la nau
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip shootSFX;
+    [SerializeField] private float volume = 0.5f;
+
     private InputSystem_Actions inputActions;
     private Vector2 aimScreenPosition;            // Última posicio del Mouse
     private Camera mainCamera;
@@ -51,5 +55,6 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.ISpaceShipAct
 		}
 		// TODO: Dispara.
 		BulletPool.Instance.GetBullet(firePoint.position, transform.rotation);
+        AudioManager.Instance.PlaySFX(shootSFX, volume);
     }
 }

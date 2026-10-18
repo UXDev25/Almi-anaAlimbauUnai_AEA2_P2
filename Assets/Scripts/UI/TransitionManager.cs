@@ -41,7 +41,8 @@ public class TransitionManager : MonoBehaviour
 
     // -- Scene Loading
     public void LoadScene(string sceneName) 
-    { 
+    {
+        AudioManager.Instance.StopMusic();
         StartCoroutine(LoadRoutine(sceneName));
     }
 
